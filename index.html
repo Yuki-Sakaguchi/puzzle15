@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>15 puzzle</title>
+		<link rel="stylesheet" href="./css/lity.min.css">
+		<link rel="stylesheet" href="./css/puzzle.css">
+	</head>
+	<body>
+		<h1>15 puzzle</h1>
+		<div id="puzzle"></div>
+		<div id="controls">
+			<button class="btn" id="reset">reset</button>		
+			<button class="btn" id="scramble">SCRAMBLE</button>
+			<button class="btn" id="hint">HINT1</button>
+			<button class="btn" id="hint2">HINT2</button>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="./js/lity.min.js"></script>
+		<script src="./js/puzzle.js"></script>
+		<script>
+			window.addEventListener('load', function() {
+				var targetImage = './images/sample2.jpg';
+
+				var puzzle = new Puzzle({
+					boxCount: 4,
+					imagePath: targetImage,
+				});
+
+				// クリア時の処理を変更
+				puzzle.gameover = function() {
+					alert('clear');
+				};
+
+				var reset = document.getElementById('reset');
+				reset.addEventListener('click', function() {
+					puzzle.reset();
+				});
+
+				var scramble = document.getElementById('scramble');
+				scramble.addEventListener('click', function() {
+					puzzle.newGame();
+				});
+
+				var hint = document.getElementById('hint');
+				hint.addEventListener('click', function() {
+					lity(targetImage);
+				});
+
+				var hint2 = document.getElementById('hint2');
+				var isShow = false;
+				hint2.addEventListener('click', function() {
+					puzzle.toggleNumber();
+				});
+			});
+		</script>
+	</body>
+</html>
